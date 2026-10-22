@@ -9,3 +9,12 @@ COPY requirements.txt .
 
 RUN pip install -U pip && \
     pip install --no-cache-dir -r requirements.txt
+
+# モデルキャッシュ用のディレクトリを作成
+RUN mkdir -p /root/.cache/fastembed_cache
+
+# モデルをあらかじめダウンロードしておく
+RUN python -c "from langchain_community.embeddings import FastEmbedEmbeddings; embeddings = FastEmbedEmbeddings(model_name='intfloat/multilingual-e5-large', cache_dir='/root/.cache/fastembed_cache')"
+
+# ↑にて、既に必要モデルのダウンロードはすんでいるので,Hugging Faceのサーバへの問い合わせをしないように環境変数を設定
+ENV HF_HUB_OFFLINE=1

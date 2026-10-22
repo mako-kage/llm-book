@@ -15,3 +15,4 @@ langgraph
 streamlit
 pyaskit
 chardet
+fastembed
