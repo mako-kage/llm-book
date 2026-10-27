@@ -16,3 +16,4 @@ streamlit
 pyaskit
 chardet
 fastembed
+pytest
